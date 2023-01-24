@@ -28,11 +28,11 @@
       </v-row>
     </div>
   </template>
-  
+
   <script>
-  
+
     import {api} from '~api'
-  
+
     export default {
       props: ['repo'],
       data: () => ({
@@ -67,4 +67,3 @@
       }
     }
   </script>
-  
