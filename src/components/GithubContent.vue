@@ -1,20 +1,27 @@
 <template>
     <div>
       <v-row>
-        <v-col cols="12">
-            <h2 v-if="repo">{{ repo.name+'/' +contentAtual }}</h2>
+
+        <v-col cols="9" class="vcol" offset="2" >
+            <h2 v-if="repo">{{ repo.name}}/{{contentAtual }}</h2>
             <v-simple-table>
               <template v-slot:default>
-                <thead>
-                  <tr>
-                    <th class="text-left">Arquivo/Pasta</th>
-                    <th class="text-left">Title</th>
-                  </tr>
-                </thead>
+
+
+                    <thead>
+                       <tr>
+                          <th class="vpasta">Arquivo/Pasta</th>
+                        </tr>
+                    </thead>
+
+
                 <tbody>
                   <tr v-for="content in contents" :key="content.number">
-                    <td>{{ content.name }}</td>
-                    <td v-if="content.type == 'dir'"><v-btn @click="abreDir(content)">abra</v-btn></td>
+
+                    <td>
+                      <v-icon>{{files[getIcon(content.name)]}}</v-icon>
+                    {{ content.name }}</td>
+                    <td class="text-left button" v-if="content.type == 'dir'"><v-btn @click="abreDir(content)">abra</v-btn></td>
                 </tr>
                 </tbody>
               </template>
@@ -46,6 +53,20 @@
         currentPage: 1,
         novoContent: [],
         contentAtual: '',
+        files: {
+        html: 'mdi-language-html5',
+        js: 'mdi-nodejs',
+        json: 'mdi-code-json',
+        md: 'mdi-language-markdown',
+        pdf: 'mdi-file-pdf',
+        png: 'mdi-file-image',
+        svg : 'mdi-file-document-outline',
+        xls: 'mdi-file-excel',
+        yml: 'mdi-file',
+        gitignore: 'mdi-github-box',
+        py : "mdi-language-python",
+        ico: 'mdi-file'
+      },
       }),
       methods: {
         async listaContent(){
@@ -75,6 +96,13 @@
             );
             this.contentAtual = antigoContent
             this.loading = false;
+        },
+        getIcon(str){
+          console.log(str)
+          if (str.includes('.')) {
+          let i = str.split('.').pop()
+          return i
+          }
         }
       },
       watch: {
@@ -85,3 +113,19 @@
         }
       }
   </script>
+  <style>
+.vcol{
+  border-color:grey !important;
+  margin-top: 20px;
+}
+.vcard{
+  background-color: goldenrod;
+}
+.button{
+  border-bottom: none !important;
+}
+.vpasta{
+  text-align: left;
+  background-color: white;
+}
+  </style>

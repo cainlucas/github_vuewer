@@ -1,6 +1,16 @@
 <template>
   <div>
-    <v-row class="text-center">
+    <div class="text-center mt-15">
+      <p v-if="this.image">
+          <v-avatar  size="128">
+          <img
+            :src="this.image"
+          >
+        </v-avatar>
+      </p>
+    </div>
+    <v-row class="text-center mt-15">
+
       <v-col cols="6">
         <v-autocomplete
         v-model="user"
@@ -33,6 +43,7 @@
 
   export default {
     data: () => ({
+      image:"",
       user: null,
       repo: null,
       usersearch: null,
@@ -53,7 +64,12 @@
         const data = await api.lista_repos(this.user)
         this.repolist = data
         this.repoloading = false
+      },
+      async getImage(user){
+        const data = await api.search_users(user)
+        this.image = await data.items[0].avatar_url
       }
+
     },
     watch: {
       usersearch () {
@@ -62,6 +78,7 @@
       user() {
         if(this.user){
           this.listaRepositorios()
+          this.getImage(this.user)
         }
       },
       repo () {
