@@ -53,7 +53,7 @@
         currentPage: 1,
         novoContent: [],
         contentAtual: '',
-        files: {
+       files: {
         html: 'mdi-language-html5',
         js: 'mdi-nodejs',
         json: 'mdi-code-json',
@@ -63,9 +63,12 @@
         svg : 'mdi-file-document-outline',
         xls: 'mdi-file-excel',
         yml: 'mdi-file',
-        gitignore: 'mdi-github-box',
         py : "mdi-language-python",
-        ico: 'mdi-file'
+        ico: 'mdi-file',
+        txt: 'mdi-clipboard-text',
+        css: 'mdi-language-css3',
+        gitignore: 'mdi-block-helper',
+        vscode: 'mdi-laptop'
       },
       }),
       methods: {
